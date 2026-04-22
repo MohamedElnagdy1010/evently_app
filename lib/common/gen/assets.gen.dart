@@ -9,7 +9,10 @@
 // ignore_for_file: type=lint
 // ignore_for_file: deprecated_member_use,directives_ordering,implicit_dynamic_list_literal,unnecessary_import
 
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart' as _svg;
+import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
 class $AssetsFontsGen {
   const $AssetsFontsGen();
@@ -97,6 +100,79 @@ class $AssetsFontsGen {
   ];
 }
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/birthday-unselected.svg
+  SvgGenImage get birthdayUnselected =>
+      const SvgGenImage('assets/icons/birthday-unselected.svg');
+
+  /// File path: assets/icons/book_selected.svg
+  SvgGenImage get bookSelected =>
+      const SvgGenImage('assets/icons/book_selected.svg');
+
+  /// File path: assets/icons/book_unselected.svg
+  SvgGenImage get bookUnselected =>
+      const SvgGenImage('assets/icons/book_unselected.svg');
+
+  /// File path: assets/icons/heart.svg
+  SvgGenImage get heart => const SvgGenImage('assets/icons/heart.svg');
+
+  /// File path: assets/icons/heart_unselected.svg
+  SvgGenImage get heartUnselected =>
+      const SvgGenImage('assets/icons/heart_unselected.svg');
+
+  /// File path: assets/icons/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/icons/home.svg');
+
+  /// File path: assets/icons/home_unselected.svg
+  SvgGenImage get homeUnselected =>
+      const SvgGenImage('assets/icons/home_unselected.svg');
+
+  /// File path: assets/icons/lock.svg
+  SvgGenImage get lock => const SvgGenImage('assets/icons/lock.svg');
+
+  /// File path: assets/icons/sms.svg
+  SvgGenImage get sms => const SvgGenImage('assets/icons/sms.svg');
+
+  /// File path: assets/icons/sport_selected.png
+  AssetGenImage get sportSelected =>
+      const AssetGenImage('assets/icons/sport_selected.png');
+
+  /// File path: assets/icons/sport_unselected.svg
+  SvgGenImage get sportUnselected =>
+      const SvgGenImage('assets/icons/sport_unselected.svg');
+
+  /// File path: assets/icons/use_runselected.svg
+  SvgGenImage get useRunselected =>
+      const SvgGenImage('assets/icons/use_runselected.svg');
+
+  /// File path: assets/icons/user.svg
+  SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
+
+  /// File path: assets/icons/user_selected.svg
+  SvgGenImage get userSelected =>
+      const SvgGenImage('assets/icons/user_selected.svg');
+
+  /// List of all assets
+  List<dynamic> get values => [
+    birthdayUnselected,
+    bookSelected,
+    bookUnselected,
+    heart,
+    heartUnselected,
+    home,
+    homeUnselected,
+    lock,
+    sms,
+    sportSelected,
+    sportUnselected,
+    useRunselected,
+    user,
+    userSelected,
+  ];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -107,14 +183,32 @@ class $AssetsImagesGen {
   AssetGenImage get routeLogo =>
       const AssetGenImage('assets/images/Route logo .png');
 
+  /// File path: assets/images/forgetpass_dark.png
+  AssetGenImage get forgetpassDark =>
+      const AssetGenImage('assets/images/forgetpass_dark.png');
+
+  /// File path: assets/images/forgetpass_light.png
+  AssetGenImage get forgetpassLight =>
+      const AssetGenImage('assets/images/forgetpass_light.png');
+
+  /// File path: assets/images/google.png
+  AssetGenImage get google => const AssetGenImage('assets/images/google.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [evently, routeLogo];
+  List<AssetGenImage> get values => [
+    evently,
+    routeLogo,
+    forgetpassDark,
+    forgetpassLight,
+    google,
+  ];
 }
 
 class Assets {
   const Assets._();
 
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
@@ -204,4 +298,78 @@ class AssetGenImageAnimation {
   final bool isAnimation;
   final Duration duration;
   final int frames;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = false;
+
+  const SvgGenImage.vec(this._assetName, {this.size, this.flavors = const {}})
+    : _isVecFormat = true;
+
+  final String _assetName;
+  final Size? size;
+  final Set<String> flavors;
+  final bool _isVecFormat;
+
+  _svg.SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    _svg.SvgTheme? theme,
+    _svg.ColorMapper? colorMapper,
+    ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
+  }) {
+    final _svg.BytesLoader loader;
+    if (_isVecFormat) {
+      loader = _vg.AssetBytesLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+      );
+    } else {
+      loader = _svg.SvgAssetLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+        theme: theme,
+        colorMapper: colorMapper,
+      );
+    }
+    return _svg.SvgPicture(
+      loader,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      colorFilter:
+          colorFilter ??
+          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
 }

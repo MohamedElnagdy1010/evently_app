@@ -2,9 +2,19 @@ import 'package:evently_app/common/theme/app_color.dart';
 import 'package:evently_app/common/theme/text_style.dart';
 import 'package:flutter/material.dart';
 
+
 class AppThemes {
   static final ThemeData lightTheme = ThemeData(
-    colorSchemeSeed: AppColor.Maincolorlightmode,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColor.Maincolorlightmode,
+      brightness: Brightness.light,
+      inversePrimary: AppColor.Maincolorlightmode,
+    ),
+    primaryColor: AppColor.Maincolorlightmode,
+    dividerColor: AppColor.Strokelightmode,
+    cardColor: AppColor.Inputslightmode,
+    disabledColor: AppColor.Disablelightmode,
+    hintColor: AppColor.Sectextlightmode,
     scaffoldBackgroundColor: AppColor.Bglightmode,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColor.Bglightmode,
@@ -13,6 +23,16 @@ class AppThemes {
       titleTextStyle: AppTextStyle.style18w500black.copyWith(
         color: AppColor.Maintextlightmode,
       ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedLabelStyle: AppTextStyle.style12w400black.copyWith(
+        color: AppColor.Maincolorlightmode,
+      ),
+      selectedItemColor: AppColor.Maincolorlightmode,
+      unselectedLabelStyle: AppTextStyle.style12w400black.copyWith(
+        color: AppColor.Disablelightmode,
+      ),
+      unselectedItemColor: AppColor.Disablelightmode,
     ),
     actionIconTheme: ActionIconThemeData(
       backButtonIconBuilder: (context) => Container(
@@ -37,7 +57,16 @@ class AppThemes {
   );
 
   static final ThemeData darkTheme = ThemeData(
-    colorSchemeSeed: AppColor.MaincolorDarkmode,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColor.MaincolorDarkmode,
+      brightness: Brightness.dark,
+      inversePrimary: AppColor.MaincolorDarkmode,
+    ),
+    primaryColor: AppColor.MaincolorDarkmode,
+    dividerColor: AppColor.StrokeDarkmode,
+    cardColor: AppColor.InputsDarkmode,
+    disabledColor: AppColor.DisableDarkmode,
+    hintColor: AppColor.SectextDarkmode,
     scaffoldBackgroundColor: AppColor.BgDarkmode,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColor.BgDarkmode,
@@ -46,6 +75,16 @@ class AppThemes {
       titleTextStyle: AppTextStyle.style18w500black.copyWith(
         color: AppColor.MaintextDarkmode,
       ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedLabelStyle: AppTextStyle.style12w400black.copyWith(
+        color: AppColor.MaincolorDarkmode,
+      ),
+      selectedItemColor: AppColor.MaincolorDarkmode,
+      unselectedLabelStyle: AppTextStyle.style12w400black.copyWith(
+        color: AppColor.DisableDarkmode,
+      ),
+      unselectedItemColor: AppColor.DisableDarkmode,
     ),
     actionIconTheme: ActionIconThemeData(
       backButtonIconBuilder: (context) => Container(

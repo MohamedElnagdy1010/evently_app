@@ -1,5 +1,13 @@
+// ignore_for_file: unused_import
+
 import 'package:evently_app/common/gen/assets.gen.dart';
+import 'package:evently_app/screens/auth/forgetPassword.dart';
 import 'package:evently_app/screens/auth/login_screen.dart';
+import 'package:evently_app/screens/auth/register_screen.dart';
+import 'package:evently_app/screens/home/tabs/homeScreen.dart';
+import 'package:evently_app/screens/home/tabs/hometab/home_tab.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -48,10 +56,17 @@ class _SpalshScreenState extends State<SpalshScreen> {
                 duration: Duration(seconds: 7),
                 curve: Curves.easeInSine,
                 onEnd: () {
-                  Navigator.pushReplacementNamed(
+                if (FirebaseAuth.instance.currentUser?.uid !=null) {
+                    Navigator.pushReplacementNamed(
+                    context,
+                    Homescreen.routeName,
+                  );
+                } else {
+                    Navigator.pushReplacementNamed(
                     context,
                     LoginScreen.routeName,
                   );
+                }
                 },
                 child: Assets.images.routeLogo.image(),
               ),

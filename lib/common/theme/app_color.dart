@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/widgets.dart';
 
 class AppColor {
@@ -8,7 +10,13 @@ class AppColor {
   static const Color Sectextlightmode  = Color(0xff686868);
   static const Color Inputslightmode = Color(0xffFFFFFF);
   static const Color Strokelightmode = Color(0xffF0F0F0);
+
+
+
   static const Color Red = Color(0xffFF3232);
+
+
+
   static const Color MaincolorDarkmode = Color(0xff457AED);
   static const Color DisableDarkmode = Color(0xffB9B9B9);    
   static const Color BgDarkmode = Color(0xff000f30    );
