@@ -1,4 +1,6 @@
 
+// ignore_for_file: file_names
+
 import 'package:evently_app/common/gen/assets.gen.dart';
 import 'package:evently_app/common/shared/snakbar.dart';
 import 'package:evently_app/common/theme/app_color.dart';

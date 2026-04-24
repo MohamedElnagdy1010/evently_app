@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:evently_app/common/gen/assets.gen.dart';
+import 'package:evently_app/screens/events/add_new_event/add_new_event.dart';
 import 'package:evently_app/screens/home/tabs/favtab/fav_tab.dart';
 import 'package:evently_app/screens/home/tabs/hometab/home_tab.dart';
 import 'package:evently_app/screens/home/tabs/profiletab/profil_tab.dart';
@@ -24,7 +25,12 @@ class _HomescreenState extends State<Homescreen> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           backgroundColor: theme.primaryColor,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(
+                              context,
+                              AddNewEvent.routeName,
+                            );
+          },
           shape: CircleBorder(),
           elevation: 50,
           child: Icon(Icons.add, color: Colors.white, size: 24),

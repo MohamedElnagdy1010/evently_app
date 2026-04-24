@@ -183,6 +183,14 @@ class $AssetsImagesGen {
   AssetGenImage get routeLogo =>
       const AssetGenImage('assets/images/Route logo .png');
 
+  /// File path: assets/images/birthdaycard.png
+  AssetGenImage get birthdaycard =>
+      const AssetGenImage('assets/images/birthdaycard.png');
+
+  /// File path: assets/images/book club.png
+  AssetGenImage get bookClub =>
+      const AssetGenImage('assets/images/book club.png');
+
   /// File path: assets/images/forgetpass_dark.png
   AssetGenImage get forgetpassDark =>
       const AssetGenImage('assets/images/forgetpass_dark.png');
@@ -194,13 +202,45 @@ class $AssetsImagesGen {
   /// File path: assets/images/google.png
   AssetGenImage get google => const AssetGenImage('assets/images/google.png');
 
+  /// File path: assets/images/meetingcard.png
+  AssetGenImage get meetingcard =>
+      const AssetGenImage('assets/images/meetingcard.png');
+
+  /// File path: assets/images/onbording1.png
+  AssetGenImage get onbording1 =>
+      const AssetGenImage('assets/images/onbording1.png');
+
+  /// File path: assets/images/onbording2.png
+  AssetGenImage get onbording2 =>
+      const AssetGenImage('assets/images/onbording2.png');
+
+  /// File path: assets/images/onbording3.png
+  AssetGenImage get onbording3 =>
+      const AssetGenImage('assets/images/onbording3.png');
+
+  /// File path: assets/images/onbording4.png
+  AssetGenImage get onbording4 =>
+      const AssetGenImage('assets/images/onbording4.png');
+
+  /// File path: assets/images/sportcard.png
+  AssetGenImage get sportcard =>
+      const AssetGenImage('assets/images/sportcard.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     evently,
     routeLogo,
+    birthdaycard,
+    bookClub,
     forgetpassDark,
     forgetpassLight,
     google,
+    meetingcard,
+    onbording1,
+    onbording2,
+    onbording3,
+    onbording4,
+    sportcard,
   ];
 }
 

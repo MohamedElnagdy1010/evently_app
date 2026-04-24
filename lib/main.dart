@@ -4,6 +4,7 @@ import 'package:evently_app/screens/auth/forgetPassword.dart';
 import 'package:evently_app/screens/auth/login_screen.dart';
 import 'package:evently_app/screens/auth/register_screen.dart';
 import 'package:evently_app/screens/auth/spalsh_screen.dart';
+import 'package:evently_app/screens/events/add_new_event/add_new_event.dart';
 import 'package:evently_app/screens/home/tabs/homeScreen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -25,13 +26,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       routes: {
         LoginScreen.routeName: (_) => LoginScreen(),
         RegisterScreen.routeName: (_) => RegisterScreen(),
         SpalshScreen.routeName: (_) => SpalshScreen(),
         Homescreen.routeName: (_) => Homescreen(),
         Forgetpassword.routeName: (_) => Forgetpassword(),
+        AddNewEvent.routeName:(_)=>AddNewEvent()
       },
     );
   }

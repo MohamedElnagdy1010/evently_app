@@ -14,23 +14,30 @@ class CategoryModel {
   });
   static List<CategoryModel> generateCategories() {
     return [
+        
       CategoryModel(
         title: "Book club",
-        image: "",
+        image: Assets.images.bookClub.path,
         iconpath: Assets.icons.bookUnselected.path,
         id: 1,
       ),
       CategoryModel(
         title: "Sports",
-        image: "",
+        image: Assets.images.sportcard.path,
         iconpath: Assets.icons.sportUnselected.path,
         id: 2,
       ),
       CategoryModel(
         title: "Birthday",
-        image: "",
+        image: Assets.images.birthdaycard.path,
         iconpath: Assets.icons.birthdayUnselected.path,
         id: 3,
+      ),
+          CategoryModel(
+        title: "Meeting",
+        image: Assets.images.meetingcard.path,
+        iconpath: Assets.icons.bookUnselected.path,
+        id: 4,
       ),
     ];
   }

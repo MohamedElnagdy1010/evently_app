@@ -32,13 +32,14 @@ class _CategoryRowState extends State<CategoryRow> {
                       color: slected_category == 0 ? Colors.white : null,
                     ),
                     Gap(8),
-                    Text("All"),
-                  ],
+                    Text("All",style: theme.textTheme.titleMedium!.copyWith(
+                color: slected_category == 0 ? Colors.white: null ,),
+                  )  ],
                 ),
               ),
-              labelStyle: theme.textTheme.titleMedium!.copyWith(
-                color: slected_category == 0 ? Colors.white: null ,
-              ),
+              // labelStyle: theme.textTheme.titleMedium!.copyWith(
+              //   color: slected_category == 0 ? Colors.white: null ,
+              // ),
               selected: slected_category == 0,
               backgroundColor: theme.cardColor,
               selectedColor: theme.primaryColor,

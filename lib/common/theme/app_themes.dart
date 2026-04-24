@@ -44,7 +44,9 @@ class AppThemes {
           border: Border.all(color: AppColor.Strokelightmode),
         ),
         child: Icon(
+        
           Icons.arrow_back_ios_new_rounded,
+          
           color: AppColor.Maincolorlightmode,
         ),
       ),

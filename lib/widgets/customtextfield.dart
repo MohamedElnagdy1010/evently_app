@@ -1,22 +1,25 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
-    super.key,
+    Key? key,
     required this.hintText,
+    this.titleText,
     this.prefixIconPath,
     this.isPassword = false,
+    this.maxLines = 1,
+  
     this.controller,
     this.validator,
-    this.titleText,
-    this.maxLines = 1,
-  });
+  }) : super(key: key);
   final String hintText;
   final String? titleText;
   final String? prefixIconPath;
   final bool isPassword;
   final int? maxLines;
+
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   @override
@@ -45,6 +48,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           maxLines: widget.maxLines,
           onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
           decoration: InputDecoration(
+        
+
             hintText: widget.hintText,
             filled: true,
             fillColor: theme.cardColor,

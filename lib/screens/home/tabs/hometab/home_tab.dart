@@ -1,8 +1,10 @@
 // ignore_for_file: file_names, unused_import
 
+import 'package:evently_app/common/gen/assets.gen.dart';
 import 'package:evently_app/common/theme/app_color.dart';
 import 'package:evently_app/common/theme/text_style.dart';
 import 'package:evently_app/models/catogory_model.dart';
+import 'package:evently_app/screens/home/event/event_card.dart';
 import 'package:evently_app/widgets/category_row.dart';
 
 import 'package:flutter/material.dart';
@@ -16,7 +18,7 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: [
           Row(
             children: [
@@ -68,11 +70,12 @@ class HomeTab extends StatelessWidget {
           ),
 
           Gap(24),
-      CategoryRow(showall: true,)
+          CategoryRow(showall: true),
+          Gap(15),
+        EventCard(),
+        EventCard(),  EventCard(),  EventCard(),  EventCard(),  EventCard(),  EventCard(),  EventCard(),
         ],
       ),
     );
   }
 }
-
-
