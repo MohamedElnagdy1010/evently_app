@@ -3,6 +3,8 @@
 import 'package:evently_app/common/gen/assets.gen.dart';
 import 'package:evently_app/screens/auth/forgetPassword.dart';
 import 'package:evently_app/screens/auth/login_screen.dart';
+import 'package:evently_app/screens/auth/onboardingScreens/mainonbording.dart';
+import 'package:evently_app/screens/auth/onboardingScreens/onboardingstatescreen.dart';
 import 'package:evently_app/screens/auth/register_screen.dart';
 import 'package:evently_app/screens/home/tabs/homeScreen.dart';
 import 'package:evently_app/screens/home/tabs/hometab/home_tab.dart';
@@ -64,7 +66,7 @@ class _SpalshScreenState extends State<SpalshScreen> {
                 } else {
                     Navigator.pushReplacementNamed(
                     context,
-                    LoginScreen.routeName,
+                      Homescreen.routeName,
                   );
                 }
                 },

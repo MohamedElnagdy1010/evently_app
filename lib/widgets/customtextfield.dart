@@ -39,6 +39,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         if (widget.titleText != null)
           Text(widget.titleText ?? '', style: theme.textTheme.titleMedium),
         TextFormField(
+          style: theme.textTheme.labelMedium,
           controller: widget.controller,
           obscureText: isObscured,
           enableSuggestions: !widget.isPassword,
