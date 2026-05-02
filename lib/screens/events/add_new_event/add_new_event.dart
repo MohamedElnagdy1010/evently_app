@@ -143,9 +143,9 @@ class _AddNewEventState extends State<AddNewEvent> {
                               print("Date : ${value.selectedDate}");
                               print("Time : ${value.selectedTime}");
 
-                              // setState(() {
-                              //   isLoading = true;
-                              // });
+                              setState(() {
+                                isLoading = true;
+                              });
                               DateTime date = value.selectedDate!;
                               date = date.copyWith(
                                 hour: value.selectedTime!.hour,
@@ -158,7 +158,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                                 catId: value.slectedCategory.id,
                                 date: date,
                               );
-                            await  EventService.createNewEvent(eventModel);
+                          
                               String? errorMessage =
                                   await EventService.createNewEvent(eventModel);
                               setState(() {

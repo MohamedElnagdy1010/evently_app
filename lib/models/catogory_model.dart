@@ -14,7 +14,6 @@ class CategoryModel {
   });
   static List<CategoryModel> generateCategories() {
     return [
-        
       CategoryModel(
         title: "Book club",
         image: Assets.images.bookClub.path,
@@ -33,12 +32,21 @@ class CategoryModel {
         iconpath: Assets.icons.birthdayUnselected.path,
         id: 3,
       ),
-          CategoryModel(
+      CategoryModel(
         title: "Meeting",
         image: Assets.images.meetingcard.path,
         iconpath: Assets.icons.bookUnselected.path,
         id: 4,
       ),
     ];
+  }
+
+  static String getcatimage(int id) {
+    List<CategoryModel> catigories = generateCategories();
+    if (id == 1) return catigories[0].image;
+    if (id == 2) return catigories[1].image;
+    if (id == 3) return catigories[2].image;
+    if (id == 4) return catigories[3].image;
+    return catigories[0].image;
   }
 }

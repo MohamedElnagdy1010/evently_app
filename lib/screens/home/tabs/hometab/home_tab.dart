@@ -4,7 +4,9 @@ import 'package:evently_app/common/gen/assets.gen.dart';
 import 'package:evently_app/common/theme/app_color.dart';
 import 'package:evently_app/common/theme/text_style.dart';
 import 'package:evently_app/models/catogory_model.dart';
+import 'package:evently_app/models/event_model.dart';
 import 'package:evently_app/screens/home/event/event_card.dart';
+import 'package:evently_app/services/event_service.dart';
 import 'package:evently_app/widgets/category_row.dart';
 
 import 'package:flutter/material.dart';
@@ -18,7 +20,7 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Scaffold(
-      body: ListView(
+      body: Column(
         children: [
           Row(
             children: [
@@ -72,8 +74,28 @@ class HomeTab extends StatelessWidget {
           Gap(24),
           CategoryRow(showall: true),
           Gap(15),
-        EventCard(),
-        EventCard(),  EventCard(),  EventCard(),  EventCard(),  EventCard(),  EventCard(),  EventCard(),
+          Expanded(
+            child: FutureBuilder(
+              future: EventService.getAllEvents(),
+              builder: (context, snapshot) {
+            
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Icon(Icons.error, size: 80, color: Colors.red),
+                  );
+                } else {
+                  List<EventModel> events = snapshot.data ?? [];
+                  return ListView.builder(
+                    itemCount: events.length,
+                    itemBuilder: (context, index) =>
+                        EventCard(eventModel: events[index]),
+                  );
+                }
+              },
+            ),
+          ),
         ],
       ),
     );

@@ -1,13 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: unused_import
 
-import 'package:evently_app/common/gen/assets.gen.dart';
-import 'package:evently_app/common/theme/app_color.dart';
+import 'package:evently_app/models/catogory_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class EventCard extends StatelessWidget {
-  const EventCard({super.key});
+import 'package:evently_app/common/gen/assets.gen.dart';
+import 'package:evently_app/common/theme/app_color.dart';
+import 'package:evently_app/models/event_model.dart';
 
+class EventCard extends StatelessWidget {
+  const EventCard({Key? key, required this.eventModel}) : super(key: key);
+  final EventModel eventModel;
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -21,7 +25,7 @@ class EventCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
           colorFilter: ColorFilter.mode(theme.dividerColor, BlendMode.modulate),
-          image: AssetImage(Assets.images.birthdaycard.path),
+          image: AssetImage(CategoryModel.getcatimage(eventModel.catId)),
           fit: BoxFit.fill,
         ),
         border: Border.all(color: theme.dividerColor),
@@ -38,7 +42,7 @@ class EventCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
-              "data",
+              eventModel.date.day.toString(),
               style: theme.textTheme.titleLarge!.copyWith(
                 color: theme.primaryColor,
               ),
@@ -55,7 +59,7 @@ class EventCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "data",
+                  eventModel.title,
                   style: theme.textTheme.labelMedium!.copyWith(
                     color: theme.primaryColor,
                   ),
