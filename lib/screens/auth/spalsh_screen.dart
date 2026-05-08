@@ -49,7 +49,6 @@ class _SpalshScreenState extends State<SpalshScreen> {
                 duration: Duration(seconds: 5),
                 curve: Curves.decelerate,
                 child: Assets.images.evently.image(),
-                
               ),
               Spacer(),
               AnimatedContainer(
@@ -58,17 +57,17 @@ class _SpalshScreenState extends State<SpalshScreen> {
                 duration: Duration(seconds: 7),
                 curve: Curves.easeInSine,
                 onEnd: () {
-                if (FirebaseAuth.instance.currentUser?.uid !=null) {
+                  if (FirebaseAuth.instance.currentUser?.uid != null) {
                     Navigator.pushReplacementNamed(
-                    context,
-                    Homescreen.routeName,
-                  );
-                } else {
+                      context,
+                      Mainonbording.routeName
+                    );
+                  } else {
                     Navigator.pushReplacementNamed(
-                    context,
-                      Homescreen.routeName,
-                  );
-                }
+                      context,
+                      LoginScreen.routeName
+                    );
+                  }
                 },
                 child: Assets.images.routeLogo.image(),
               ),

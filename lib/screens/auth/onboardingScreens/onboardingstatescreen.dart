@@ -1,8 +1,12 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:evently_app/common/gen/assets.gen.dart';
-import 'package:evently_app/screens/auth/onboardingScreens/fristonboardingscreen.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/provider/theme_provider.dart';
 import 'package:evently_app/widgets/custom_filled_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
 class Onboardingstatescreen extends StatefulWidget {
   const Onboardingstatescreen({super.key});
@@ -17,6 +21,7 @@ class _OnboardingstatescreenState extends State<Onboardingstatescreen> {
   String selectedTheme = "light";
   @override
   Widget build(BuildContext context) {
+      AppLocalizations?  language = AppLocalizations.of(context);
     ThemeData theme = Theme.of(context);
     return SafeArea(
       child: Padding(
@@ -34,14 +39,14 @@ class _OnboardingstatescreenState extends State<Onboardingstatescreen> {
             ),
             Gap(24),
             Text(
-              "Personalize Your Experience", //TODO: localization
+                language!.onboardingstatescreen_title,
               style: theme.textTheme.displayMedium!.copyWith(
                 color: theme.appBarTheme.foregroundColor,
               ),
             ),
             Gap(8),
             Text(
-              "Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.", //TODO: localization
+              language!.onboardingstatescreen_Description,
               style: theme.textTheme.titleSmall!.copyWith(
                 color: theme.hintColor,
               ),
@@ -56,18 +61,20 @@ class _OnboardingstatescreenState extends State<Onboardingstatescreen> {
                   ),
                 ),
                 Spacer(),
-
-                onboardingFilledButton(context, "English", () {
-                  setState(() {
-                    selectedLanguage = "en";
-                  });
-                }, selectedLanguage == "en"),
-
-                onboardingFilledButton(context, "Arabic", () {
-                  setState(() {
-                    selectedLanguage = "ar";
-                  });
-                }, selectedLanguage == "ar"),
+                FilledButton(
+                  onPressed: () {
+                    Provider.of<ThemeProvider>(
+                      context,
+                      listen: false,
+                    ).updateLanguage();
+                  },
+                  child: Text(
+                    Provider.of<ThemeProvider>(context).appLocale ==
+                        "en"
+                        ? "English"
+                        : "Arabic",
+                  ),
+                ),
               ],
             ),
             Gap(25),
@@ -80,17 +87,20 @@ class _OnboardingstatescreenState extends State<Onboardingstatescreen> {
                   ),
                 ),
                 Spacer(),
-                onboardingFilledButton(context, "Light", () {
-                  setState(() {
-                    selectedTheme = "light";
-                  });
-                }, selectedTheme == "light"),
-
-                onboardingFilledButton(context, "Dark", () {
-                  setState(() {
-                    selectedTheme = "dark";
-                  });
-                }, selectedTheme == "dark"),
+                FilledButton(
+                  onPressed: () {
+                    Provider.of<ThemeProvider>(
+                      context,
+                      listen: false,
+                    ).updatetheme();
+                  },
+                  child: Text(
+                    Provider.of<ThemeProvider>(context).themeMode ==
+                            ThemeMode.dark
+                        ? "Dark"
+                        : "Light",
+                  ),
+                ),
               ],
             ),
           ],
@@ -117,8 +127,32 @@ class _OnboardingstatescreenState extends State<Onboardingstatescreen> {
         text,
         style: Theme.of(context).textTheme.labelLarge!.copyWith(
           fontWeight: FontWeight.w500,
-          color: Colors.white,
+          color: const Color.fromARGB(255, 0, 146, 165),
         ),
+      ),
+    );
+  }
+
+  FilledButton onboardingFilledButtonnew(
+    BuildContext context,
+    String text1,
+    String text2,
+    void Function()? onPressed,
+    bool state,
+  ) {
+    return FilledButton(
+      style: FilledButton.styleFrom(
+        backgroundColor: state
+            ? Theme.of(context).colorScheme.inversePrimary
+            : Theme.of(context).cardColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      onPressed: onPressed,
+      child: Row(
+        children: [
+          CustomFilledButton(text: text1),
+          CustomFilledButton(text: text2),
+        ],
       ),
     );
   }

@@ -3,21 +3,29 @@
 import 'package:evently_app/common/gen/assets.gen.dart';
 import 'package:evently_app/common/theme/app_color.dart';
 import 'package:evently_app/common/theme/text_style.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/models/catogory_model.dart';
 import 'package:evently_app/models/event_model.dart';
+import 'package:evently_app/provider/theme_provider.dart';
 import 'package:evently_app/screens/home/event/event_card.dart';
 import 'package:evently_app/services/event_service.dart';
 import 'package:evently_app/widgets/category_row.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
   static const String routeName = "/HomeTab";
   @override
   Widget build(BuildContext context) {
+    final cridential = FirebaseAuth.instance.currentUser;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    bool isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+    bool langstate = themeProvider.appLocale == "en";
     ThemeData theme = Theme.of(context);
     return Scaffold(
       body: Column(
@@ -28,13 +36,13 @@ class HomeTab extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Welcome Back ✨",
+                    "${AppLocalizations.of(context)!.hello} ✨",
                     style: theme.textTheme.labelSmall!.copyWith(
                       color: theme.hintColor,
                     ),
                   ),
                   Text(
-                    "Mohamed ayman",
+                    "${cridential!.email?.split('@')[0]}",
                     style: theme.textTheme.displaySmall!.copyWith(
                       color: theme.primaryColor,
                     ),
@@ -44,14 +52,29 @@ class HomeTab extends StatelessWidget {
               Spacer(),
               Row(
                 children: [
-                  Icon(Icons.wb_sunny_outlined),
+                  IconButton(
+                    onPressed: () {
+                      Provider.of<ThemeProvider>(
+                        context,
+                        listen: false,
+                      ).updatetheme();
+                    },
+                    icon: isDarkMode
+                        ? Icon(Icons.nightlight_outlined)
+                        : Icon(Icons.wb_sunny_outlined),
+                  ),
                   Gap(4),
                   SizedBox(
                     height: 32,
                     width: 32,
 
                     child: FilledButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Provider.of<ThemeProvider>(
+                          context,
+                          listen: false,
+                        ).updateLanguage();
+                      },
                       style: FilledButton.styleFrom(
                         padding: EdgeInsets.all(0),
                         shape: RoundedRectangleBorder(
@@ -59,7 +82,7 @@ class HomeTab extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        "EN",
+                        langstate ? "EN" : "AR",
                         style: AppTextStyle.style14w600black.copyWith(
                           color: Colors.white,
                         ),
@@ -78,7 +101,6 @@ class HomeTab extends StatelessWidget {
             child: FutureBuilder(
               future: EventService.getAllEvents(),
               builder: (context, snapshot) {
-            
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
@@ -96,6 +118,8 @@ class HomeTab extends StatelessWidget {
               },
             ),
           ),
+
+          Gap(50),
         ],
       ),
     );

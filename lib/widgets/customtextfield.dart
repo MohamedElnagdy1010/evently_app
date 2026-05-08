@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.hintText,
     this.titleText,
     this.prefixIconPath,
@@ -13,7 +13,7 @@ class CustomTextField extends StatefulWidget {
   
     this.controller,
     this.validator,
-  }) : super(key: key);
+  });
   final String hintText;
   final String? titleText;
   final String? prefixIconPath;

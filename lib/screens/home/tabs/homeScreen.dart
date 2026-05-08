@@ -16,7 +16,7 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  List tabs = [HomeTab(), FavTab(), ProfilTab()];
+  late List tabs = [HomeTab(), FavTab(), ProfilTab()];
   int index = 0;
   @override
   Widget build(BuildContext context) {
@@ -26,10 +26,7 @@ class _HomescreenState extends State<Homescreen> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: theme.primaryColor,
           onPressed: () {
-            Navigator.pushNamed(
-                              context,
-                              AddNewEvent.routeName,
-                            );
+            Navigator.pushNamed(context, AddNewEvent.routeName);
           },
           shape: CircleBorder(),
           elevation: 50,

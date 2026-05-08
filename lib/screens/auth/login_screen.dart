@@ -4,6 +4,7 @@ import 'package:evently_app/common/utils/validation_utils.dart';
 import 'package:evently_app/models/custom_user_model.dart';
 import 'package:evently_app/screens/auth/AuthwithGoogle.dart';
 import 'package:evently_app/screens/auth/forgetPassword.dart';
+import 'package:evently_app/screens/auth/onboardingScreens/mainonbording.dart';
 import 'package:evently_app/screens/auth/register_screen.dart';
 import 'package:evently_app/screens/home/tabs/homeScreen.dart';
 import 'package:evently_app/services/auth_service.dart';
@@ -167,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             await AuthService.getuser();
                             Navigator.pushReplacementNamed(
                               context,
-                              Homescreen.routeName,
+                            Mainonbording.routeName,
                             );
                             setState(() {
                               isloading = false;

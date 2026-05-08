@@ -115,6 +115,9 @@ class $AssetsIconsGen {
   SvgGenImage get bookUnselected =>
       const SvgGenImage('assets/icons/book_unselected.svg');
 
+  /// File path: assets/icons/edit.svg
+  SvgGenImage get edit => const SvgGenImage('assets/icons/edit.svg');
+
   /// File path: assets/icons/heart.svg
   SvgGenImage get heart => const SvgGenImage('assets/icons/heart.svg');
 
@@ -143,6 +146,9 @@ class $AssetsIconsGen {
   SvgGenImage get sportUnselected =>
       const SvgGenImage('assets/icons/sport_unselected.svg');
 
+  /// File path: assets/icons/trash.svg
+  SvgGenImage get trash => const SvgGenImage('assets/icons/trash.svg');
+
   /// File path: assets/icons/use_runselected.svg
   SvgGenImage get useRunselected =>
       const SvgGenImage('assets/icons/use_runselected.svg');
@@ -159,6 +165,7 @@ class $AssetsIconsGen {
     birthdayUnselected,
     bookSelected,
     bookUnselected,
+    edit,
     heart,
     heartUnselected,
     home,
@@ -167,6 +174,7 @@ class $AssetsIconsGen {
     sms,
     sportSelected,
     sportUnselected,
+    trash,
     useRunselected,
     user,
     userSelected,

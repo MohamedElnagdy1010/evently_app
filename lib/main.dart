@@ -1,5 +1,8 @@
 import 'package:evently_app/common/theme/app_themes.dart';
 import 'package:evently_app/firebase_options.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
+import 'package:evently_app/models/event_model.dart';
+import 'package:evently_app/provider/theme_provider.dart';
 import 'package:evently_app/screens/auth/forgetPassword.dart';
 import 'package:evently_app/screens/auth/login_screen.dart';
 import 'package:evently_app/screens/auth/onboardingScreens/fristonboardingscreen.dart';
@@ -11,9 +14,13 @@ import 'package:evently_app/screens/auth/register_screen.dart';
 import 'package:evently_app/screens/auth/spalsh_screen.dart';
 import 'package:evently_app/screens/events/add_new_event/add_new_event.dart';
 import 'package:evently_app/screens/home/tabs/homeScreen.dart';
+import 'package:evently_app/screens/home/tabs/hometab/detailsScreen.dart';
+import 'package:evently_app/screens/home/tabs/hometab/editScreen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,24 +34,50 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppThemes.lightTheme,
-      darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.light,
-      routes: {
-        LoginScreen.routeName: (_) => LoginScreen(),
-        RegisterScreen.routeName: (_) => RegisterScreen(),
-        SpalshScreen.routeName: (_) => SpalshScreen(),
-        Homescreen.routeName: (_) => Homescreen(),
-        Forgetpassword.routeName: (_) => Forgetpassword(),
-        AddNewEvent.routeName: (_) => AddNewEvent(),
-        Onboardingstatescreen.routeName: (_) => Onboardingstatescreen(),
-        Fristonboardingscreen.routeName: (_) => Fristonboardingscreen(),
-        Seconboardingscreen.routeName: (_) => Seconboardingscreen(),
-        Lastonboardingscreen.routeName: (_) => Lastonboardingscreen(),
-        Mainonbording.routeName:(_)=> Mainonbording()
-      },
+    return ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, value, child) => MaterialApp(
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,  
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            Locale('en'), // English
+            Locale('ar'), // Spanish
+          ],
+          debugShowCheckedModeBanner: false,
+          locale: Locale(value.appLocale),
+          theme: AppThemes.lightTheme,
+          darkTheme: AppThemes.darkTheme,
+          themeMode: value.themeMode,
+          routes: {
+            LoginScreen.routeName: (_) => LoginScreen(),
+            RegisterScreen.routeName: (_) => RegisterScreen(),
+            SpalshScreen.routeName: (_) => SpalshScreen(),
+            Homescreen.routeName: (_) => Homescreen(),
+            Forgetpassword.routeName: (_) => Forgetpassword(),
+            AddNewEvent.routeName: (_) => AddNewEvent(),
+            Onboardingstatescreen.routeName: (_) => Onboardingstatescreen(),
+            Fristonboardingscreen.routeName: (_) => Fristonboardingscreen(),
+            Seconboardingscreen.routeName: (_) => Seconboardingscreen(),
+            Lastonboardingscreen.routeName: (_) => Lastonboardingscreen(),
+            Mainonbording.routeName: (_) => Mainonbording(),
+            Detailsscreen.routeName: (context) {
+              final event =
+                  ModalRoute.of(context)!.settings.arguments as EventModel;
+              return Detailsscreen(eventModel: event);
+            },
+            Editscreen.routeName: (context) {
+              final args =
+                  ModalRoute.of(context)!.settings.arguments as EventModel;
+              return Editscreen(eventModel: args);
+            },
+          },
+        ),
+      ),
     );
   }
 }

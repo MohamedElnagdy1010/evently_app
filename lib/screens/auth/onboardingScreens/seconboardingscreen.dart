@@ -1,4 +1,7 @@
+// ignore_for_file: unused_import
+
 import 'package:evently_app/common/gen/assets.gen.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/screens/auth/onboardingScreens/lastonboardingscreen.dart';
 
 import 'package:evently_app/widgets/custom_filled_button.dart';
@@ -11,6 +14,7 @@ class Seconboardingscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      AppLocalizations?  language = AppLocalizations.of(context);
     ThemeData theme = Theme.of(context);
     return SafeArea(
       child: Padding(
@@ -18,7 +22,7 @@ class Seconboardingscreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 350,
               child: Image.asset(
@@ -28,7 +32,7 @@ class Seconboardingscreen extends StatelessWidget {
             ),
             Gap(24),
             Text(
-              "Effortless Event Planning", //TODO: localization
+              language!.seconboardingscreen_title,
               style: theme.textTheme.displayMedium!.copyWith(
                 color: theme.appBarTheme.foregroundColor,
               ),
@@ -37,8 +41,7 @@ class Seconboardingscreen extends StatelessWidget {
             Text(
               textAlign: TextAlign.start,
 
-              "Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.",
-
+                language!.seconboardingscreen_Description,
               style: theme.textTheme.titleSmall!.copyWith(
                 color: theme.hintColor,
               ),

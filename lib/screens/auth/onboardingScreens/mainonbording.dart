@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, unnecessary_import, non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently_app/common/gen/assets.gen.dart';
 import 'package:evently_app/screens/auth/onboardingScreens/fristonboardingscreen.dart';
@@ -24,6 +26,7 @@ class _MainonbordingState extends State<Mainonbording> {
   int isSateboarding = 0;
   @override
   Widget build(BuildContext context) {
+    
     List<Widget> Bordingviews = [
       Onboardingstatescreen(),
       Fristonboardingscreen(),
@@ -64,6 +67,7 @@ class _MainonbordingState extends State<Mainonbording> {
         children: [
           Expanded(
             child: PageView.builder(
+              physics:NeverScrollableScrollPhysics() ,
               scrollDirection: Axis.horizontal,
               controller: controller,
               itemCount: Bordingviews.length,

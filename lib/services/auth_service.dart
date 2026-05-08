@@ -22,7 +22,7 @@ class AuthService {
         print('CODE:->${e.code}');
       }
 
-      return "${e.code.replaceAll("-", " ")}";
+      return e.code.replaceAll("-", " ");
     } catch (e) {
       if (kDebugMode) {
         print("ERROR:->$e");

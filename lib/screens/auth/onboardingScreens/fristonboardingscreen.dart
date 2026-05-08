@@ -1,7 +1,9 @@
+// ignore_for_file: unused_import
+
 import 'package:evently_app/common/gen/assets.gen.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/screens/auth/onboardingScreens/seconboardingscreen.dart';
 import 'package:evently_app/widgets/custom_OutlinedButton.dart';
-import 'package:evently_app/widgets/custom_filled_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -11,6 +13,7 @@ class Fristonboardingscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  AppLocalizations?  language = AppLocalizations.of(context);
     ThemeData theme = Theme.of(context);
     return SafeArea(
       child: Padding(
@@ -18,7 +21,7 @@ class Fristonboardingscreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 350,
               child: Image.asset(
@@ -28,7 +31,7 @@ class Fristonboardingscreen extends StatelessWidget {
             ),
             Gap(24),
             Text(
-              "Find Events That Inspire You", //TODO: localization
+            language!.fristonboardingscreen_title, //TODO: localization
               style: theme.textTheme.displayMedium!.copyWith(
                 color: theme.appBarTheme.foregroundColor,
               ),
@@ -37,7 +40,7 @@ class Fristonboardingscreen extends StatelessWidget {
             Text(
               textAlign: TextAlign.start,
 
-              "Dive into a world of events crafted to fit your unique interests. Whether you're into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.",
+            language!.fristonboardingscreen_Description,
               style: theme.textTheme.titleSmall!.copyWith(
                 color: theme.hintColor,
               ),

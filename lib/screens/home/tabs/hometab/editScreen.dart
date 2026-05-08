@@ -2,6 +2,7 @@
 
 import 'package:evently_app/common/gen/assets.gen.dart';
 import 'package:evently_app/common/utils/validation_utils.dart';
+import 'package:evently_app/models/catogory_model.dart';
 import 'package:evently_app/models/event_model.dart';
 import 'package:evently_app/screens/events/provider/evnent_provider.dart';
 import 'package:evently_app/screens/home/event/customcategory_row.dart';
@@ -14,20 +15,31 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class AddNewEvent extends StatefulWidget {
-  const AddNewEvent({super.key});
-  static const String routeName = "/AddNewEvent";
+class Editscreen extends StatefulWidget {
+  const Editscreen({super.key, required this.eventModel});
+  static const String routeName = "/Editscreen";
+  final EventModel eventModel;
   @override
-  State<AddNewEvent> createState() => _AddNewEventState();
+  State<Editscreen> createState() => _EditscreenState();
 }
 
-class _AddNewEventState extends State<AddNewEvent> {
+class _EditscreenState extends State<Editscreen> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+
   bool isLoading = false;
+  @override
+  void initState() {
+    super.initState();
+
+    titleController.text = widget.eventModel.title;
+    descController.text = widget.eventModel.description;
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -57,7 +69,12 @@ class _AddNewEventState extends State<AddNewEvent> {
                             theme.dividerColor,
                             BlendMode.modulate,
                           ),
-                          image: AssetImage(value.slectedCategory.image),
+                          image: AssetImage(
+                            value.slectedCategory.image ??
+                                CategoryModel.getcatimage(
+                                  widget.eventModel.catId,
+                                ),
+                          ),
                           fit: BoxFit.fill,
                         ),
                         border: Border.all(color: theme.dividerColor),
@@ -94,7 +111,9 @@ class _AddNewEventState extends State<AddNewEvent> {
                           Icons.date_range_outlined,
                           "Event Date",
                           (value.selectedDate == null
-                              ? "Choose date"
+                              ? DateFormat(
+                                  "MMM d y ",
+                                ).format(widget.eventModel.date)
                               : "${value.selectedDate!.day}/${value.selectedDate!.month}/${value.selectedDate!.year}"),
                           () async {
                             DateTime? selectedDate = await showDatePicker(
@@ -116,7 +135,9 @@ class _AddNewEventState extends State<AddNewEvent> {
                           Icons.timelapse_rounded,
                           "Event time",
                           (value.selectedTime == null
-                              ? "Choose Time"
+                              ? DateFormat(
+                                  "h:mm a ",
+                                ).format(widget.eventModel.date)
                               : value.selectedTime!.format(context)),
                           () async {
                             TimeOfDay? selectedTime = await showTimePicker(
@@ -134,49 +155,53 @@ class _AddNewEventState extends State<AddNewEvent> {
                         Gap(4),
                         CustomFilledButton(
                           isloading: isLoading,
-                          text: "Add Event",
+                          text: "Edit Event",
                           onPressed: () async {
-                            if (_validateForm(value)) {
-                              print(value.slectedCategory.title);
-                              print("Title : ${titleController.text}");
-                              print("Description : ${descController.text}");
-                              print("Date : ${value.selectedDate}");
-                              print("Time : ${value.selectedTime}");
+                            if (_globalKey.currentState!.validate()) {
+                              setState(() => isLoading = true);
 
-                              setState(() {
-                                isLoading = true;
-                              });
-                              DateTime date = value.selectedDate!;
+                              DateTime date =
+                                  value.selectedDate ?? widget.eventModel.date;
+
                               date = date.copyWith(
-                                hour: value.selectedTime!.hour,
-                                minute: value.selectedTime!.minute,
+                                hour:
+                                    (value.selectedTime ??
+                                            TimeOfDay.fromDateTime(
+                                              widget.eventModel.date,
+                                            ))
+                                        .hour,
+                                minute:
+                                    (value.selectedTime ??
+                                            TimeOfDay.fromDateTime(
+                                              widget.eventModel.date,
+                                            ))
+                                        .minute,
                               );
-                              EventModel eventModel = EventModel(
+
+                              EventModel updatedEvent = EventModel(
+                                id: widget.eventModel.id,
                                 userId: FirebaseAuth.instance.currentUser!.uid,
                                 title: titleController.text,
                                 description: descController.text,
-                                catId: value.slectedCategory.id,
+                                catId:
+                                    value.slectedCategory.id !=
+                                        CategoryModel.generateCategories()
+                                            .first
+                                            .id
+                                    ? value.slectedCategory.id
+                                    : widget.eventModel.catId,
                                 date: date,
                               );
-                          
-                              String? errorMessage =
-                                  await EventService.createNewEvent(eventModel);
-                              setState(() {
-                                isLoading = false;
-                              });
-                              if (errorMessage != null) {
-                                Fluttertoast.showToast(
-                                  msg: errorMessage,
-                                  backgroundColor: Colors.red,
-                                );
-                              } else {
-                                Fluttertoast.showToast(
-                                  msg: "Event Added successful",
-                                );
-                                   if (context.mounted) {
-                                    // Navigator.of(context).pop(true);
-                                    Navigator.pop(context, true);
-                                  }
+
+                              await EventService.editEvent(updatedEvent);
+
+                              setState(() => isLoading = false);
+
+                              Fluttertoast.showToast(msg: "Event Updated");
+
+                              if (context.mounted) {
+                                
+                                setState(() {Navigator.pop(context, true);});
                               }
                             }
                           },

@@ -1,4 +1,7 @@
+// ignore_for_file: unused_import
+
 import 'package:evently_app/common/gen/assets.gen.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/screens/home/tabs/homeScreen.dart';
 
 import 'package:evently_app/widgets/custom_filled_button.dart';
@@ -11,6 +14,7 @@ class Lastonboardingscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      AppLocalizations?  language = AppLocalizations.of(context);
     ThemeData theme = Theme.of(context);
     return SafeArea(
       child: Padding(
@@ -18,7 +22,7 @@ class Lastonboardingscreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 350,
               child: Image.asset(
@@ -28,7 +32,7 @@ class Lastonboardingscreen extends StatelessWidget {
             ),
             Gap(24),
             Text(
-              "Connect with Friends & Share Moments", //TODO: localization
+                language!.lastonboardingscreen_title,
               style: theme.textTheme.displayMedium!.copyWith(
                 color: theme.appBarTheme.foregroundColor,
               ),
@@ -37,8 +41,7 @@ class Lastonboardingscreen extends StatelessWidget {
             Text(
               textAlign: TextAlign.start,
 
-              " Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.  ",
-
+            language!.lastonboardingscreen_Description,
               style: theme.textTheme.titleSmall!.copyWith(
                 color: theme.hintColor,
               ),
